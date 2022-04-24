@@ -26,7 +26,12 @@ void deleteQ(){
     }else{
             num = q[f];
             printf("\n%d delete",num);
-            f++;
+            if(f == r){
+                    f=-1;
+                    r=-1;
+            }else{
+                f++;
+            }
             //printf("\n%d deleted",q[f++]);
     }
 }
