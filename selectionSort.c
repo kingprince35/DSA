@@ -27,6 +27,7 @@ int main(){
             a[min] = tmp;
         }
         for(x=0;x<n;x++){
+
             printf("  %d",a[x]);
         }
     }
