@@ -38,8 +38,8 @@ void inOrder(struct node *root){
     if(root == NULL)
         return;
     inOrder(root->left);
-    printf("%d ",root->data);
-    inOrder(root->right);
+    printf("%d ",root->data);//25 35 40
+    inOrder(root->right);//
 }
 
 
@@ -61,6 +61,40 @@ void postOrder(struct node *root){
 }
 
 
+struct node* deleteNode(struct node* root,int key){// (50,35) => (35,35)
+    struct node* tmp = NULL;
+    if(root==NULL){
+        return root;
+    }
+    if(key < root->data){//25 < 50 | 25 < 35 | 25 < 25
+        //left
+        //50
+         root->left = deleteNode(root->left,key);//(50,35) => (35,35)
+    }else if(key > root->data){//25 > 50 | 25 > 25
+        //right
+        root->right = deleteNode(root->right,key);
+    }else if(key == root->data){//25 == 25
+        if(root->left == NULL && root->right == NULL){
+            //leaf
+            free(root);
+            return NULL;
+        }else if(root->left == NULL){//35
+            //node with 1 child -> right
+            tmp = root->right; //40
+            free(root);
+            return tmp;
+        }else if(root->right == NULL){
+            //node with 1 child -> left
+            tmp = root->left; //40
+            free(root);
+            return tmp;
+
+        }else{
+            //node with 2 child
+        }
+    }
+    return root;
+}
 
 int main(){
     int i=1;
@@ -81,6 +115,8 @@ int main(){
             addNode(80,root);
             addNode(150,root);
 
+
+
             //1 for add
             //2 for print
             //print(root);
@@ -95,11 +131,18 @@ int main(){
     */
     printf("\nIn Order\n");
     inOrder(root);
-    printf("\nPre Order\n");
-    preOrder(root);
-    printf("\nPost Order\n");
-    postOrder(root);
+   // printf("\nPre Order\n");
+   // preOrder(root);
+   // printf("\nPost Order\n");
+   // postOrder(root);
+    deleteNode(root,25);
+    printf("\nIn Order\n");
+    inOrder(root);
 
+
+    deleteNode(root,35);
+    printf("\nIn Order\n");
+    inOrder(root);
 
     return 0;
 }
