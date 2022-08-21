@@ -7,6 +7,32 @@ struct node{
 }*root= NULL;
 
 
+struct node* rightRotate(struct node *root){//100
+    struct node *leftchild,*leftchildright;
+
+     leftchild =  root->left;
+     leftchildright =  leftchild->right;
+
+    leftchild->right = root;
+    root->left = leftchildright;
+
+    return leftchild;
+}
+
+
+struct node* leftRotate(struct node *root){//100
+    struct node *rightchild,*rightchildleft;
+
+     rightchild =  root->right;
+     rightchildleft =  rightchild->left;
+
+    rightchild->left = root;
+    root->right = rightchildleft;
+
+    return rightchild;
+}
+
+
 struct node* createNode(int data){
 	struct node *tmp;
 	tmp = (struct node*)malloc(sizeof(struct node));
@@ -40,15 +66,22 @@ struct node *insertNode(struct node *root,int data){//100,150
             if(bf < 0){
                 if(data > root->right->data){
                     printf(" RR ");
+                    return leftRotate(root);
                 }else{
                     printf(" RL ");
+                    root->right = rightRotate(root->right);
+                    return leftRotate(root);
                 }
             }else{
                 //left
                 if(data < root->left->data){
                     printf(" LL ");
+                    return rightRotate(root);
+
                 }else{
                     printf(" LR ");
+                    root->left = leftRotate(root->left);
+                    return rightRotate(root);
                 }
             }
 
@@ -94,39 +127,14 @@ int getBalanceF(struct node *root){
     return  lh - rh ;
 }
 
-struct node* rightRotate(struct node *root){//100
-    struct node *leftchild,*leftchildright;
-
-     leftchild =  root->left;
-     leftchildright =  leftchild->right;
-
-    leftchild->right = root;
-    root->left = leftchildright;
-
-    return leftchild;
-}
-
-
-struct node* leftRotate(struct node *root){//100
-    struct node *rightchild,*rightchildleft;
-
-     rightchild =  root->right;
-     rightchildleft =  rightchild->left;
-
-    rightchild->left = root;
-    root->right = rightchildleft;
-
-    return rightchild;
-}
-
 
 int main(){
             printf("\n inserting 100");
  	root  = insertNode(root,100); //NULL,100
             printf("\n inserting 150");
-            insertNode(root,150);//100,150
+    root  =        insertNode(root,150);//100,150
             printf("\n inserting 50");
-            insertNode(root,50);
+        root  =    insertNode(root,50);
             //printf("\n inserting 300");
             //insertNode(root,300);
 
@@ -134,16 +142,16 @@ int main(){
             //printf("\n inserting 110");
             //insertNode(root,110);
             printf("\n inserting 75");
-            insertNode(root,75);
+         root  =   insertNode(root,75);
 
             printf("\n inserting 25");
-            insertNode(root,25);
+       root  =     insertNode(root,25);
 
             printf("\n inserting 10");
-            insertNode(root,10);
+       root  =     insertNode(root,10);
 
             printf("\n Tree \n");
-            inOrder(root);
+             inOrder(root);
 	return 0;
 }
 
