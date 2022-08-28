@@ -133,6 +133,50 @@ int getBalanceF(struct node *root){
     return  lh - rh ;
 }
 
+struct node* inorderSuccessor(struct node *root){
+    while(root!= NULL && root->left!=NULL){
+        root= root->left;
+    }
+    return root;
+}
+
+struct node* deleteNode(struct node *root,int key){
+    struct node *tmp;
+    if(root==NULL)
+        return NULL;
+
+    if(root->data == key){
+        //delete
+        if(root->left == NULL && root->right == NULL){
+            free(root);
+            return NULL;
+        }else if(root->left == NULL && root->right != NULL){
+            tmp  = root->right;
+            free(root);
+            return root->right;
+        }else if(root->right == NULL && root->left != NULL){
+            tmp= root->left ;
+            free(root);
+            return tmp;
+        }else {
+            //both present
+            tmp = inorderSuccessor(root->right);
+            root->data = tmp->data;
+            return deleteNode(root->right,tmp->data);
+        }
+
+    }else if( key > root->data){
+        root->right = deleteNode(root->right,key);
+    }else if(key < root->data){
+        root->left = deleteNode(root->left,key);
+    }
+    //height
+    //bf
+    //rotate
+
+
+    return root;
+}
 
 int main(){
     /*
@@ -169,6 +213,13 @@ int main(){
 	printf("\n TREE \n");
 	inOrder(root);
 	printf("\n ROOT %d",root->data);
+
+
+    deleteNode(root,4);
+    printf("\n TREE \n");
+	inOrder(root);
+	printf("\n ROOT %d",root->data);
+
 	return 0;
 }
 
