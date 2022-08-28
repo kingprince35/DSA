@@ -16,6 +16,9 @@ struct node* rightRotate(struct node *root){//100
     leftchild->right = root;
     root->left = leftchildright;
 
+    root->height = calculateHeight(root);
+    leftchild->height = calculateHeight(leftchild);
+
     return leftchild;
 }
 
@@ -28,6 +31,9 @@ struct node* leftRotate(struct node *root){//100
 
     rightchild->left = root;
     root->right = rightchildleft;
+
+    root->height  = calculateHeight(root);
+    rightchild->height = calculateHeight(rightchild);
 
     return rightchild;
 }
@@ -129,6 +135,7 @@ int getBalanceF(struct node *root){
 
 
 int main(){
+    /*
             printf("\n inserting 100");
  	root  = insertNode(root,100); //NULL,100
             printf("\n inserting 150");
@@ -152,6 +159,16 @@ int main(){
 
             printf("\n Tree \n");
              inOrder(root);
+
+	*/
+
+	int i;
+	for(i=1;i<=7;i++){
+        root = insertNode(root,i);
+	}
+	printf("\n TREE \n");
+	inOrder(root);
+	printf("\n ROOT %d",root->data);
 	return 0;
 }
 
