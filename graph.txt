@@ -1,0 +1,24 @@
+Graph  -> collection of vertex(node) and edges(path) 
+ 
+1) non linear data structure 
+2) it contains vertices and edges. 
+
+G(V,E)  V->Vertices E->Edges 
+G(V)={S,N,CG,U,M}
+G(E)={(S,U),(S,M),(S,N),(U,CG), (M,CG),(N,CG)}
+
+
+1) directed graph | diagraph -> edges -> direction -> arrow 
+2) undirected graph -> edges -> does not have any direction 
+3) NullGraph -> if a graph does not have any edges than its known as null graph.
+4) connected graph -> no node is isolated. 
+5) complete graph -> each node is connected with all node 
+
+goole map 
+source -> A 
+destination -> B 
+
+
+1) array 
+2) linkedlist 
+
