@@ -64,7 +64,9 @@ struct node *insertNode(struct node *root,int data){//100,150
 		root->height = calculateHeight(root);
 		bf = getBalanceF(root);
         printf(" [%d %d] ",root->data,bf);
-
+       //  -1 0 1
+       //+ L
+       //- R
         if( !(bf>-2 && bf <2) ){
             printf(" *Rotation Required For %d *",root->data);
 
@@ -141,6 +143,7 @@ struct node* inorderSuccessor(struct node *root){
 }
 
 struct node* deleteNode(struct node *root,int key){
+    int bf;
     struct node *tmp;
     if(root==NULL)
         return NULL;
@@ -171,8 +174,37 @@ struct node* deleteNode(struct node *root,int key){
         root->left = deleteNode(root->left,key);
     }
     //height
+    root->height = calculateHeight(root);
+
     //bf
-    //rotate
+    bf = getBalanceF(root);
+        if( !(bf>-2 && bf <2) ){
+            printf(" *Rotation Required For %d *",root->data);
+
+            //negt R
+            if(bf < 0){
+                if(key > root->right->data){
+                    printf(" RR ");
+                    return leftRotate(root);
+                }else{
+                    printf(" RL ");
+                    root->right = rightRotate(root->right);
+                    return leftRotate(root);
+                }
+            }else{
+                //left
+                if(key < root->left->data){
+                    printf(" LL ");
+                    return rightRotate(root);
+
+                }else{
+                    printf(" LR ");
+                    root->left = leftRotate(root->left);
+                    return rightRotate(root);
+                }
+            }
+
+        } // main bf if
 
 
     return root;
