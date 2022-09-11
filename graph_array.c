@@ -1,6 +1,9 @@
 #include<stdio.h>
 #define SIZE 4
 
+
+//graph
+
 int graph[SIZE][SIZE];
 int visited[SIZE];
 int cost = 0 ;
