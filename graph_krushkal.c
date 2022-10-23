@@ -13,6 +13,7 @@ struct edge{
 int main(){
     struct vertex *vertices;//vertices
     struct edge *edges;//edges
+    struct edge tmp;
     int i,s,d,c,j;
     int totalVertex;
     int totalEdges;
@@ -54,5 +55,31 @@ int main(){
             }
         }
     }
+
+
+    //sort all edges
+
+    for(i=0;i<totalEdges*2;i++){
+        for(j=0;j<totalEdges*2-1;j++){
+            if(edges[j].cost > edges[j+1].cost){
+
+                tmp = edges[j];
+                edges[j] = edges[j+1];
+                edges[j+1] = tmp;
+            }
+        }
+    }
+
+    printf("\nSorted Edges\n");
+
+
+    for(i=0;i<totalEdges*2;i++){
+
+       printf("\n%d  %d   %d",edges[i].src,edges[i].dest,edges[i].cost);
+    }
+
+    //sorted
+
+
     return 0;
 }
